@@ -5,10 +5,9 @@ services:
   # This section defines our Java backend API.
   - type: web
     name: zoha-api
-    # THIS IS THE FIX: The correct key is 'env', not 'runtime'.
     env: java 
-    # This is the most important part: Tell Render to look inside this folder.
-    rootDir: ./portfolio-api
+    # THIS IS THE FIX: Changed to match your actual folder name.
+    rootDir: ./ArchitectureWebsite
     # Define the build and start commands.
     buildCommand: "./mvnw clean package"
     startCommand: "java -jar target/portfolio-api-*.jar"
