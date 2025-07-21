@@ -23,4 +23,4 @@ EXPOSE 8085
 
 # The command to run when the container starts
 # IMPORTANT: Check that this .jar file name matches what's in your /target folder
-ENTRYPOINT ["java", "-jar", "target/portfolio-api-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "target/ArchitectureWebsite-0.0.1-SNAPSHOT.jar"]
