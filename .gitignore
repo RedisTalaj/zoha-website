@@ -1,13 +1,8 @@
-# IDE and environment files
 .idea/
 .vscode/
 *.iml
 .env
-
-# Node modules
 /portfolio-client/node_modules/
 /portfolio-client/dist/
-
-# Allow the final JAR but ignore other build files
 /ArchitectureWebsite/target/*
 !/ArchitectureWebsite/target/ArchitectureWebsite-0.0.1-SNAPSHOT.jar
