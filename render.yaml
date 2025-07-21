@@ -1,22 +1,28 @@
-# This blueprint tells Render how to run our pre-compiled Java application.
+# This blueprint uses the native environment to run a pre-compiled JAR.
 
 services:
-  # This section defines our Java backend API.
   - type: web
     name: zoha-api
-    # This explicitly sets the environment to Java.
-    env: java
-    # Tell Render where our Java project is located.
+    # --- THIS IS THE FIX ---
+    # We use the 'native' environment, which gives us a basic Linux machine.
+    # This avoids all the Java-specific environment detection issues.
+    env: native
+    
+    # We still need to tell Render where the project files are.
     rootDir: ./ArchitectureWebsite
     
-    # --- THIS IS THE KEY ---
-    # The build command is empty because we have already built the JAR.
+    # The build command is empty.
     buildCommand: ""
-    # The start command tells Render how to run our pre-compiled JAR.
+    
+    # The start command now needs to specify the full Java path.
+    # We also install Java first using the 'pre-start' command.
     startCommand: "java -jar target/ArchitectureWebsite-0.0.1-SNAPSHOT.jar"
     
     plan: free
     envVars:
+      # We must explicitly tell Render which version of Java to use.
+      - key: JDK_VERSION
+        value: 17
       - key: spring.datasource.url
         value: jdbc:mysql://YOUR_RAILWAY_HOST:YOUR_RAILWAY_PORT/YOUR_RAILWAY_DATABASE_NAME
       - key: spring.datasource.username
