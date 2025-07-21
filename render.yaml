@@ -5,7 +5,7 @@ services:
   # This section defines our Java backend API.
   - type: web
     name: zoha-api
-    # This tells Render that our API runs Java.
+    # THIS IS THE FIX: The correct key is 'env', not 'runtime'.
     env: java 
     # This is the most important part: Tell Render to look inside this folder.
     rootDir: ./portfolio-api
@@ -24,6 +24,6 @@ services:
         value: root
       - key: spring.datasource.password
         # We will set this secret value in Render's UI.
-        value: YOUR_RAILWAY_PASSWORD
+        fromSecret: true
       - key: spring.jpa.hibernate.ddl-auto
         value: update
