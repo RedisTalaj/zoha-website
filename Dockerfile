@@ -1,25 +1,24 @@
 # Use an official OpenJDK 17 runtime as a parent image
 FROM openjdk:17-jdk-slim
 
-# Set a working directory for the whole build process
-WORKDIR /build
+# Create a directory for our application
+WORKDIR /app
 
-# Copy the ENTIRE Java project folder into the build environment
-COPY ./ArchitectureWebsite .
+# --- THIS IS THE FIX ---
+# Copy the entire Java project into the /app directory we just created.
+# The files will now be at /app/pom.xml, /app/src, etc.
+COPY ./ArchitectureWebsite /app
 
-# --- THIS IS THE FIX for "exit code: 127" ---
-# Add executable permissions to the Maven wrapper script
-RUN chmod +x ./mvnw
+# Add executable permissions to the Maven wrapper script inside /app
+RUN chmod +x mvnw
 
-# Now that it's executable, we can run it.
-# Download project dependencies
+# Now, run the Maven commands
 RUN ./mvnw dependency:go-offline
-
-# Package the application into a JAR file, skipping tests
 RUN ./mvnw clean package -DskipTests
 
 # Expose the correct port
 EXPOSE 8085
 
 # The command to run when the container starts
+# The path to the JAR file is now relative to our WORKDIR /app
 ENTRYPOINT ["java", "-jar", "target/ArchitectureWebsite-0.0.1-SNAPSHOT.jar"]
