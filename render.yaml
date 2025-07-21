@@ -1,12 +1,12 @@
-# Simplified and corrected Render blueprint for Docker.
+# Simplified and Corrected Blueprint
 
 services:
   - type: web
     name: zoha-api
+    # Tell Render to use a Docker environment
     env: docker
-    # We point directly to the Dockerfile's location from the root.
-    # We are REMOVING the dockerContext line.
-    dockerfilePath: ./ArchitectureWebsite/Dockerfile
+    # Render will automatically find the Dockerfile at the root
+    
     plan: free
     envVars:
       - key: spring.datasource.url
