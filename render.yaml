@@ -1,11 +1,19 @@
-# Simplified and Corrected Blueprint
+# This blueprint tells Render how to run our pre-compiled Java application.
 
 services:
+  # This section defines our Java backend API.
   - type: web
     name: zoha-api
-    # Tell Render to use a Docker environment
-    env: docker
-    # Render will automatically find the Dockerfile at the root
+    # This explicitly sets the environment to Java.
+    env: java
+    # Tell Render where our Java project is located.
+    rootDir: ./ArchitectureWebsite
+    
+    # --- THIS IS THE KEY ---
+    # The build command is empty because we have already built the JAR.
+    buildCommand: ""
+    # The start command tells Render how to run our pre-compiled JAR.
+    startCommand: "java -jar target/ArchitectureWebsite-0.0.1-SNAPSHOT.jar"
     
     plan: free
     envVars:
