@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --background-color: #f4f6f8; /* A very light, clean gray */
+  --surface-color: #ffffff; /* Pure white for cards and surfaces */
+  --text-color: #1a202c; /* A dark, readable charcoal */
+  --secondary-text-color: #718096; /* A softer gray for subtitles */
+  --accent-color: #00c6b3; /* A vibrant, modern teal */
+  --accent-color-hover: #00a797;
+  --border-color: #e2e8f0;
+  --font-family: 'Inter', sans-serif;
+}
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-color-hover);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+p {
+  color: var(--secondary-text-color);
+  line-height: 1.7;
+}
+
+/* Redefine button styles for the new theme */
+button {
+  font-family: var(--font-family);
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--accent-color-hover);
+  transform: translateY(-2px);
+}
