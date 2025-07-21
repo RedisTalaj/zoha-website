@@ -1,0 +1,5 @@
+# Allow the specific application JAR file to be committed
+!/ArchitectureWebsite/target/ArchitectureWebsite-0.0.1-SNAPSHOT.jar
+
+# Now ignore everything else in the target folder
+/ArchitectureWebsite/target/*
