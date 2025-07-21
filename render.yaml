@@ -1,18 +1,17 @@
-# This is the most robust version of the Render blueprint.
+# This is the final, corrected Render blueprint for a Docker deployment.
 
 services:
   # This section defines our Java backend API.
   - type: web
     name: zoha-api
-    # This is the most explicit way to define the environment.
-    # It tells Render to use its native environment for Java 17.
+    # Tell Render to use a Docker environment.
     env: docker
-    dockerfile: Dockerfile
-    # Tell Render where the code is.
-    rootDir: ./ArchitectureWebsite
-    # Define the build and start commands.
-    buildCommand: "./mvnw clean package"
-    startCommand: "java -jar target/portfolio-api-*.jar"
+    # This is the correct keyword for the path to the Dockerfile.
+    # It points to the Dockerfile inside your Java project folder.
+    dockerfilePath: ./ArchitectureWebsite/Dockerfile
+    # NOTE: We remove rootDir, buildCommand, and startCommand
+    # because all those instructions are now inside the Dockerfile.
+    
     # Specify the free instance type.
     plan: free
     # Define our environment variables.
