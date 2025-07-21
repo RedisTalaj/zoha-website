@@ -1,26 +1,26 @@
-# This is the corrected instruction manual for Render.
+# This is the most robust version of the Render blueprint.
 
 services:
   # This section defines our Java backend API.
   - type: web
     name: zoha-api
-    # FIX #1: The correct keyword is "env", not "runtime".
-    env: java 
-    # Use the folder name from your screenshot.
+    # This is the most explicit way to define the environment.
+    # It tells Render to use its native environment for Java 17.
+    env: docker
+    dockerfile: Dockerfile
+    # Tell Render where the code is.
     rootDir: ./ArchitectureWebsite
     # Define the build and start commands.
     buildCommand: "./mvnw clean package"
     startCommand: "java -jar target/portfolio-api-*.jar"
     # Specify the free instance type.
     plan: free
-    # This section defines our environment variables.
+    # Define our environment variables.
     envVars:
       - key: spring.datasource.url
-        # This is a placeholder. You will set the real value in Render's UI.
         value: jdbc:mysql://YOUR_RAILWAY_HOST:YOUR_RAILWAY_PORT/YOUR_RAILWAY_DATABASE_NAME
       - key: spring.datasource.username
         value: root
-      # FIX #2: The password is now a simple key/value pair to fix the parsing error.
       - key: spring.datasource.password
         value: YOUR_RAILWAY_PASSWORD_PLACEHOLDER
       - key: spring.jpa.hibernate.ddl-auto
