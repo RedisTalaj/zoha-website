@@ -1,28 +1,27 @@
-# This file is an instruction manual for Render.
-# It defines all the services in our project.
+# This is the corrected instruction manual for Render.
 
 services:
   # This section defines our Java backend API.
   - type: web
     name: zoha-api
+    # FIX #1: The correct keyword is "env", not "runtime".
     env: java 
-    # THIS IS THE FIX: Changed to match your actual folder name.
+    # Use the folder name from your screenshot.
     rootDir: ./ArchitectureWebsite
     # Define the build and start commands.
     buildCommand: "./mvnw clean package"
     startCommand: "java -jar target/portfolio-api-*.jar"
     # Specify the free instance type.
     plan: free
-    # This section is for our database credentials.
-    # You will add your Railway database details here on the Render website.
+    # This section defines our environment variables.
     envVars:
       - key: spring.datasource.url
-        # This will be a placeholder. We will set the real value in Render's UI.
+        # This is a placeholder. You will set the real value in Render's UI.
         value: jdbc:mysql://YOUR_RAILWAY_HOST:YOUR_RAILWAY_PORT/YOUR_RAILWAY_DATABASE_NAME
       - key: spring.datasource.username
         value: root
+      # FIX #2: The password is now a simple key/value pair to fix the parsing error.
       - key: spring.datasource.password
-        # We will set this secret value in Render's UI.
-        fromSecret: true
+        value: YOUR_RAILWAY_PASSWORD_PLACEHOLDER
       - key: spring.jpa.hibernate.ddl-auto
         value: update
