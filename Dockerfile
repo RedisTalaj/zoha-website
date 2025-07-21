@@ -1,17 +1,19 @@
 # Use an official OpenJDK 17 runtime as a parent image
 FROM openjdk:17-jdk-slim
 
-# Create a directory for our application
+# Create a directory inside the container
 WORKDIR /app
 
-# Copy the entire Java project into the /app directory
-COPY ./ArchitectureWebsite /app
+# --- THIS IS THE FIX ---
+# Copy the contents of the Java project folder into the /app directory
+COPY ./ArchitectureWebsite/ .
 
-# --- THIS IS THE CRITICAL LINE ---
-# Add executable permissions to the Maven wrapper script inside the container
+# Now, we are certain that mvnw, pom.xml, etc., are in our current directory (/app)
+
+# Add executable permissions to the Maven wrapper script
 RUN chmod +x mvnw
 
-# Now, run the Maven commands
+# Run the Maven commands
 RUN ./mvnw dependency:go-offline
 RUN ./mvnw clean package -DskipTests
 
