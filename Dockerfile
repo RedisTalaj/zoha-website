@@ -4,13 +4,15 @@ FROM openjdk:17-jdk-slim
 # Create a directory inside the container
 WORKDIR /app
 
-# --- THIS IS THE FIX ---
 # Copy the contents of the Java project folder into the /app directory
 COPY ./ArchitectureWebsite/ .
 
-# Now, we are certain that mvnw, pom.xml, etc., are in our current directory (/app)
+# --- THIS IS THE CRITICAL DEBUGGING STEP ---
+# List all files in the current directory (/app) to see what was copied.
+# This will be printed in the Render build log.
+RUN ls -la
 
-# Add executable permissions to the Maven wrapper script
+# Attempt to add executable permissions to the Maven wrapper script
 RUN chmod +x mvnw
 
 # Run the Maven commands
