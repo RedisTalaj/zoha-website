@@ -1,25 +1,14 @@
-# This blueprint uses the correct `runtime` keyword for a native environment.
+# This blueprint is for a pre-compiled JAR using the native runtime.
 
 services:
   - type: web
     name: zoha-api
-    
-    # --- THIS IS THE FIX ---
-    # The correct keyword is `runtime`. My apologies.
     runtime: native
-    
-    # Tell Render where our project files are located.
     rootDir: ./ArchitectureWebsite
-    
-    # The build command is empty because the JAR is pre-compiled.
     buildCommand: ""
-    
-    # The command to run our application.
     startCommand: "java -jar target/ArchitectureWebsite-0.0.1-SNAPSHOT.jar"
-    
     plan: free
     envVars:
-      # We must explicitly tell Render which version of Java to make available.
       - key: JDK_VERSION
         value: 17
       - key: spring.datasource.url
