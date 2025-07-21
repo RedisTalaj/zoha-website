@@ -1,21 +1,13 @@
-# This is the final blueprint for a Docker deployment in a sub-directory.
+# Simplified and corrected Render blueprint for Docker.
 
 services:
-  # This section defines our Java backend API.
   - type: web
     name: zoha-api
-    # Tell Render to use a Docker environment.
     env: docker
-    
-    # --- THIS IS THE FIX ---
-    # We define a 'dockerContext' which tells Docker to 'cd' into this directory first.
-    dockerContext: ./ArchitectureWebsite
-    # Then, we tell it the name of the Dockerfile *within that context*.
-    dockerfilePath: ./Dockerfile
-    
-    # Specify the free instance type.
+    # We point directly to the Dockerfile's location from the root.
+    # We are REMOVING the dockerContext line.
+    dockerfilePath: ./ArchitectureWebsite/Dockerfile
     plan: free
-    # Define our environment variables.
     envVars:
       - key: spring.datasource.url
         value: jdbc:mysql://YOUR_RAILWAY_HOST:YOUR_RAILWAY_PORT/YOUR_RAILWAY_DATABASE_NAME
