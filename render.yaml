@@ -1,4 +1,4 @@
-# This is the final, corrected Render blueprint for a Docker deployment.
+# This is the final blueprint for a Docker deployment in a sub-directory.
 
 services:
   # This section defines our Java backend API.
@@ -6,11 +6,12 @@ services:
     name: zoha-api
     # Tell Render to use a Docker environment.
     env: docker
-    # This is the correct keyword for the path to the Dockerfile.
-    # It points to the Dockerfile inside your Java project folder.
-    dockerfilePath: ./ArchitectureWebsite/Dockerfile
-    # NOTE: We remove rootDir, buildCommand, and startCommand
-    # because all those instructions are now inside the Dockerfile.
+    
+    # --- THIS IS THE FIX ---
+    # We define a 'dockerContext' which tells Docker to 'cd' into this directory first.
+    dockerContext: ./ArchitectureWebsite
+    # Then, we tell it the name of the Dockerfile *within that context*.
+    dockerfilePath: ./Dockerfile
     
     # Specify the free instance type.
     plan: free
