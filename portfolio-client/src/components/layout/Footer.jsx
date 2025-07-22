@@ -56,7 +56,7 @@ function Footer() {
                 <FooterColumn>
                     <ColumnTitle>Connect</ColumnTitle>
                     <FooterLink href="https://www.instagram.com/zoha_architects/">Instagram</FooterLink>
-                    <FooterLink href="mailto:zohaarchitectss@gmail.com">Gmail</FooterLink>
+                    <FooterLink href="mailto:zohaarchitectss@gmail.com">Email</FooterLink>
                     <FooterLink href="https://wa.me/355674707777">WhatsApp</FooterLink>
                 </FooterColumn>
                 <FooterColumn>
