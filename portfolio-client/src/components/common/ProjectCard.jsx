@@ -2,9 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-// --- THIS IS THE FIX ---
-// We REMOVE the hardcoded localhost URL and IMPORT the dynamic one.
 import { BACKEND_URL } from '../../api/apiService';
 
 const CardLink = styled(Link)`
@@ -51,7 +48,6 @@ function ProjectCard({ project, variants }) {
   return (
     <motion.div variants={variants}>
       <CardLink to={`/projects/${project.id}`}>
-        {/* The src attribute now correctly builds the full, dynamic URL */}
         <CardImage src={`${BACKEND_URL}${project.imageUrl}`} alt={project.title} />
         <CardTitle>{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
