@@ -321,7 +321,7 @@ function Home() {
 
             <AboutSection>
                 <ArchitectImage 
-                    src="https://images.unsplash.com/photo-15810gnd3450021-4a7360e9a6b5?auto=format&fit=crop&w=800"
+                    src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800"
                     alt="Zoha, the lead architect"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}

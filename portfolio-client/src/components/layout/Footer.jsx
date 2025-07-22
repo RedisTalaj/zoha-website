@@ -61,7 +61,7 @@ function Footer() {
                 </FooterColumn>
                 <FooterColumn>
                     <ColumnTitle>Contact</ColumnTitle>
-                    <p>123 Design Avenue,<br/>Metropolis, 10101<br/>contact@zoha-arch.com</p>
+                    <p>Rruga Vilson,<br/>Shkoder<br/>contact@zoha-arch.com</p>
                 </FooterColumn>
             </FooterGrid>
             <CopyrightText>© {new Date().getFullYear()} Zoha Architecture. All Rights Reserved.</CopyrightText>
