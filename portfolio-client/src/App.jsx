@@ -1,13 +1,13 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Outlet } from 'react-router-dom'; // <-- IMPORT Outlet
 
-// Layout Components
+// Import Layouts
 import Layout from './components/layout/Layout';
 
-// Page Components
+// Import Pages
 import Home from './pages/Home';
-import ProjectsPage from './pages/Projects';
+import ProjectsPage from './pages/Projects'; // Use the same name as in your previous working version
 import ProjectDetail from './pages/ProjectDetail';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -17,37 +17,35 @@ function App() {
   const location = useLocation();
 
   return (
-    <Layout>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          {/* Public Routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-          
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route 
-            path="/admin" 
-            element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
-      </AnimatePresence>
-    </Layout>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        {/* === YOUR CORRECT PUBLIC ROUTING STRUCTURE === */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="projects" element={<ProjectsPage />} />
+          <Route path="projects/:id" element={<ProjectDetail />} />
+        </Route>
+
+        {/* === THE NEW ADMIN ROUTES (they do not use the main Layout) === */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </AnimatePresence>
   );
 }
 
-// We need to wrap App in the Router
-function AppWrapper() {
-  return (
-    <Router>
-      <App />
-    </Router>
-  );
-}
+// Wrap App in Router
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
 
 export default AppWrapper;
