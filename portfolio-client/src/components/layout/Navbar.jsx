@@ -117,7 +117,7 @@ function Navbar() {
   return (
     <NavContainer className={scrolled ? 'scrolled' : ''}>
       <NavContent>
-        <Logo to="/">Zoha Studio</Logo>
+        <Logo to="/">Zoha Architects</Logo>
         <NavLinks>
           {navItems.map((item) => (
             <NavItem key={item.to}>
