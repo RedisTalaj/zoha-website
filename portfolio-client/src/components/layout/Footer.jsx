@@ -55,7 +55,7 @@ function Footer() {
                 </FooterColumn>
                 <FooterColumn>
                     <ColumnTitle>Connect</ColumnTitle>
-                    <FooterLink href="#">Instagram</FooterLink>
+                    <FooterLink href="https://www.instagram.com/zoha_architects/">Instagram</FooterLink>
                     <FooterLink href="#">LinkedIn</FooterLink>
                     <FooterLink href="#">Pinterest</FooterLink>
                 </FooterColumn>
