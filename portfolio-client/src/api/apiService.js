@@ -1,6 +1,14 @@
 import axios from 'axios';
 
-const API_URL = `${import.meta.env.VITE_API_BASE_URL}/api`;
+// Get the base URL from the environment variables
+const VITE_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+// --- THIS IS THE NEW LINE WE ARE ADDING ---
+// This exports the root URL (e.g., "https://zoha-api-1.onrender.com") for image paths
+export const BACKEND_URL = VITE_BASE_URL;
+
+// This creates the URL for API calls (e.g., "https://zoha-api-1.onrender.com/api")
+const API_URL = `${VITE_BASE_URL}/api`;
 
 const apiClient = axios.create({ baseURL: API_URL });
 
@@ -48,7 +56,6 @@ export const getSubmissions = async () => {
 export const deleteSubmission = (id) => apiClient.delete(`/admin/submissions/${id}`);
 
 export const uploadImages = async (formData) => {
-    // THIS IS THE FIX: Ensure upload also returns clean data
     const response = await apiClient.post('/admin/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });

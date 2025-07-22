@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion'; // This is now used by <motion.div>
+import { motion } from 'framer-motion';
 
-const BACKEND_URL = 'http://localhost:8085';
+// --- THIS IS THE FIX ---
+// We REMOVE the hardcoded localhost URL and IMPORT the dynamic one.
+import { BACKEND_URL } from '../../api/apiService';
 
 const CardLink = styled(Link)`
   text-decoration: none;
@@ -41,18 +43,15 @@ const CardDescription = styled.p`
   overflow: hidden;
 `;
 
-// ** THE FIX IS HERE **
-// We now accept the 'variants' prop from Home.jsx
 function ProjectCard({ project, variants }) { 
   if (!project) {
     return null;
   }
 
   return (
-    // We wrap the entire card in a <motion.div>
-    // and apply the variants to it. This fixes the error.
     <motion.div variants={variants}>
       <CardLink to={`/projects/${project.id}`}>
+        {/* The src attribute now correctly builds the full, dynamic URL */}
         <CardImage src={`${BACKEND_URL}${project.imageUrl}`} alt={project.title} />
         <CardTitle>{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
