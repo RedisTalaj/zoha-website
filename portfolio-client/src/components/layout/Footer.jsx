@@ -56,12 +56,12 @@ function Footer() {
                 <FooterColumn>
                     <ColumnTitle>Connect</ColumnTitle>
                     <FooterLink href="https://www.instagram.com/zoha_architects/">Instagram</FooterLink>
-                    <FooterLink href="#">LinkedIn</FooterLink>
-                    <FooterLink href="#">Pinterest</FooterLink>
+                    <FooterLink href="mailto:zohaarchitectss@gmail.com">Gmail</FooterLink>
+                    <FooterLink href="https://wa.me/0674707777">WhatsApp</FooterLink>
                 </FooterColumn>
                 <FooterColumn>
                     <ColumnTitle>Contact</ColumnTitle>
-                    <p>Rruga Vilson,<br/>Shkoder<br/>contact@zoha-arch.com</p>
+                    <p>Rruga Vilson,<br/>Shkoder<br/>zohaarchitectss@gmail.com</p>
                 </FooterColumn>
             </FooterGrid>
             <CopyrightText>© {new Date().getFullYear()} Zoha Architecture. All Rights Reserved.</CopyrightText>
