@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BACKEND_URL } from '../../api/apiService';
+
+// --- CHANGE 1: We no longer need BACKEND_URL for displaying images in this component ---
+// import { BACKEND_URL } from '../../api/apiService';
 
 const CardLink = styled(Link)`
   text-decoration: none;
@@ -48,7 +50,12 @@ function ProjectCard({ project, variants }) {
   return (
     <motion.div variants={variants}>
       <CardLink to={`/projects/${project.id}`}>
-        <CardImage src={`${BACKEND_URL}${project.imageUrl}`} alt={project.title} />
+        {/* 
+          --- CHANGE 2: THE FIX IS HERE ---
+          The src attribute now uses the full Cloudinary URL directly from project.imageUrl.
+          The `${BACKEND_URL}` prefix has been removed.
+        */}
+        <CardImage src={project.imageUrl} alt={project.title} />
         <CardTitle>{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
       </CardLink>

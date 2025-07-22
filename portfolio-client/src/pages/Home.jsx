@@ -4,15 +4,14 @@ import { useEffect, useState, useRef } from 'react';
 import AnimatedPage from '../components/animations/AnimatedPage';
 import ProjectCard from '../components/common/ProjectCard';
 
-// --- THIS IS THE FIX: We add BACKEND_URL to the import list ---
-import { getProjects, BACKEND_URL } from '../api/apiService';
+// --- CHANGE 1: We no longer need BACKEND_URL for displaying images in this file ---
+import { getProjects } from '../api/apiService';
 
 // --- Import icons for the process section ---
 import { FiPenTool, FiLayers, FiCompass } from 'react-icons/fi';
 
-// --- The hardcoded BACKEND_URL constant is now DELETED from here ---
 
-// --- Styled Components ---
+// --- Styled Components (No changes here) ---
 const Section = styled.section`
   padding: 6rem 5%;
   max-width: 1600px;
@@ -91,7 +90,6 @@ const LoadingContainer = styled.div`
   font-size: 1.5rem;
 `;
 
-// --- NEW STYLES FOR THE "OUR PROCESS" SECTION ---
 const ProcessGrid = styled(motion.div)`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -135,8 +133,6 @@ const StepDescription = styled.p`
     color: var(--secondary-text-color);
 `;
 
-
-// --- FEATURED PROJECTS COMPONENT AND ITS STYLES ---
 const StickyContainer = styled.div`
   display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; position: relative;
   @media (max-width: 992px) { grid-template-columns: 1fr; }
@@ -187,7 +183,12 @@ function FeaturedProjects({ projects }) {
       <StickyContainer>
         <StickyImageContainer>
           <AnimatePresence mode="wait">
-            <StickyImage key={activeStickyProject.id} src={`${BACKEND_URL}${activeStickyProject.imageUrl}`}
+            {/* 
+              --- CHANGE 2: THE FIX IS HERE ---
+              The src attribute now uses the full Cloudinary URL directly from activeStickyProject.imageUrl.
+              The `${BACKEND_URL}` prefix has been removed. This is the only change to this line.
+            */}
+            <StickyImage key={activeStickyProject.id} src={activeStickyProject.imageUrl}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.6, ease: 'easeInOut' }}
             />

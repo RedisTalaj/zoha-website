@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-// --- THIS IS THE FIX: We add BACKEND_URL to the import list ---
-import { getProjectById, getProjectImages, createSubmission, BACKEND_URL } from '../api/apiService'; 
+// --- CHANGE 1: We no longer need BACKEND_URL for displaying images in this file ---
+import { getProjectById, getProjectImages, createSubmission } from '../api/apiService'; 
 import AnimatedPage from '../components/animations/AnimatedPage';
 import { Parallax } from 'react-parallax';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-// --- The hardcoded BACKEND_URL constant is now DELETED from here ---
 
-// --- STYLED COMPONENTS ---
+// --- STYLED COMPONENTS (No changes here) ---
 const LoadingContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -224,11 +223,18 @@ function ProjectDetail() {
     if (error) return <LoadingContainer>{error}</LoadingContainer>;
     if (!project) return <LoadingContainer>Project not found.</LoadingContainer>;
     
-    const coverImageUrl = project.imageUrl ? `${BACKEND_URL}${project.imageUrl}` : '';
-    const allImages = [{ src: coverImageUrl }, ...additionalImages.map(img => ({ src: `${BACKEND_URL}${img.imageUrl}` }))];
+    // --- CHANGE 2: `coverImageUrl` now uses the full URL directly ---
+    const coverImageUrl = project.imageUrl ? project.imageUrl : '';
+
+    // --- CHANGE 3: `allImages` now maps the full Cloudinary URLs directly ---
+    const allImages = [
+        { src: coverImageUrl }, 
+        ...additionalImages.map(img => ({ src: img.imageUrl }))
+    ];
 
     return (
         <AnimatedPage>
+            {/* --- CHANGE 4: The Parallax `bgImage` now uses the correct full URL --- */}
             <Parallax bgImage={coverImageUrl} strength={300}>
                 <HeroSection>
                     <HeroTitle initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -250,7 +256,8 @@ function ProjectDetail() {
                         <h2 style={{ marginBottom: '1.5rem', fontSize: '2rem' }}>Gallery</h2>
                         <GalleryGrid>
                             {additionalImages.map((image, index) => (
-                                <GalleryImage key={image.id} src={`${BACKEND_URL}${image.imageUrl}`} alt={`Project gallery image ${index + 1}`}
+                                // --- CHANGE 5: The GalleryImage `src` now uses the correct full URL ---
+                                <GalleryImage key={image.id} src={image.imageUrl} alt={`Project gallery image ${index + 1}`}
                                     onClick={() => { setLightboxIndex(index + 1); setLightboxOpen(true); }}
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
